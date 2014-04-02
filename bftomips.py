@@ -48,9 +48,9 @@ for i, character in enumerate(bf_string):
     elif character == '.':
         translation += ["disp $r1 0"]
     elif character == '>':
-        translation += ["sw $r1 $r0", "addi $r0 $r0 1", "lw $r1 $r0"]
+        translation += ["sw $r1 0($r0)", "addi $r0 $r0 1", "lw $r1 0($r0)"]
     elif character == '<':
-        translation += ["sw $r1 $r0", "addi $r0 $r0 -1", "lw $r1 $r0"]
+        translation += ["sw $r1 0($r0)", "addi $r0 $r0 -1", "lw $r1 0($r0)"]
     elif character == '[':
         jump_stack += [len(translation)] # Jump to next instruction
 
