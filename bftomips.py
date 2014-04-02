@@ -57,21 +57,27 @@ for i, character in enumerate(bf_string):
         # Need to find the closing bracket
         other_brackets = 0
         offset = 0
+        found_matching = False
         for char in bf_string[i:]:
             if char == '>' or char == '<':
                 offset += 3
             else:
                 offset += 1
 
-            if character == '[':
+            if char == '[':
                 other_brackets += 1
-            elif character == ']':
+            elif char == ']':
                 if other_brackets:
                     other_brackets -= 1
                 else:
+                    found_matching = True
                     break
 
-        translation += ["beq $r1 $r2 " + str(offset)]
+        if found_matching:
+            translation += ["beq $r1 $r2 " + str(offset)]
+        else:
+            print("Unmatched parenthesis!")
+            exit(-1)
     elif character == ']':
         try:
             address = jump_stack.pop()
