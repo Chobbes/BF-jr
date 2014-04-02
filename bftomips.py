@@ -58,7 +58,7 @@ for i, character in enumerate(bf_string):
         other_brackets = 0
         offset = 0
         found_matching = False
-        for char in bf_string[i:]:
+        for char in bf_string[i+1:]:
             if char == '>' or char == '<':
                 offset += 3
             else:
