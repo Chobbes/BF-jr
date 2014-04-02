@@ -75,7 +75,7 @@ for i, character in enumerate(bf_string):
 
         if found_matching:
             if offset < -128 or offset > 127:
-                print("Warning: large branch. Won't work on MIPS Jr.")
+                print("Warning: large branch (" + str(offset) + ") Won't work on MIPS Jr.")
 
             translation += ["beq $r1 $r2 " + str(offset)]
         else:
