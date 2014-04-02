@@ -61,6 +61,8 @@ for i, character in enumerate(bf_string):
         for char in bf_string[i+1:]:
             if char == '>' or char == '<':
                 offset += 3
+            elif char == '[':
+                offset += 2
             else:
                 offset += 1
 
@@ -74,10 +76,7 @@ for i, character in enumerate(bf_string):
                     break
 
         if found_matching:
-            if offset < -128 or offset > 127:
-                print("Warning: large branch (" + str(offset) + ") Won't work on MIPS Jr.")
-
-            translation += ["beq $r1 $r2 " + str(offset)]
+            translation += ["bne $r1 $r2 1", "j " + str(offset + len(translation) + 2)]
         else:
             print("Unmatched parenthesis!")
             exit(-1)
