@@ -74,6 +74,9 @@ for i, character in enumerate(bf_string):
                     break
 
         if found_matching:
+            if offset < -128 or offset > 127:
+                print("Warning: large branch. Won't work on MIPS Jr.")
+
             translation += ["beq $r1 $r2 " + str(offset)]
         else:
             print("Unmatched parenthesis!")
